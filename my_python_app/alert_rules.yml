@@ -1,0 +1,22 @@
+groups:
+  - name: container_alerts
+    rules:
+      # Алерт на високе завантаження CPU
+      - alert: HighCPUUsage
+        expr: rate(container_cpu_usage_seconds_total[1m]) > 0.8
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High use CPU"
+          description: "Container use more 80% CPU last 2 minutes."
+
+      # Алерт на високе використання пам'яті
+      - alert: HighMemoryUsage
+        expr: container_memory_usage_bytes > 500000000
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High use memory"
+          description: "Container use more 500Mb memory."

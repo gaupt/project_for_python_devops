@@ -23,6 +23,13 @@ services:
     depends_on:
       - prometheus
 
+  alertmanager:
+    image: prom/alertmanager
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     ports:
